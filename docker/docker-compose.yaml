@@ -1,0 +1,12 @@
+
+services:
+  postgres:
+    image: 'postgres:14.3-alpine'
+    container_name: 'twitter-postgres'
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=${TWITTER_DB_USERNAME}
+      - POSTGRES_PASSWORD=${TWITTER_DB_PASSWORD}
+      - POSTGRES_DB=${TWITTER_DB_NAME}
+

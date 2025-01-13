@@ -1,0 +1,9 @@
+
+
+#DB
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/twitter_db
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
