@@ -1,4 +1,8 @@
 package ru.aveskin.twitter.sequrity.web.dto;
 
-public record RegisterRequest(String username, String password) {
+import jakarta.validation.constraints.NotBlank;
+
+public record RegisterRequest(
+        @NotBlank String username,
+        @NotBlank String password) {
 }
