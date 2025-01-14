@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/0.0.1/changelog-create-teittwer-schema.sql
   - include:
       file: db/changelog/0.0.1/changelog-create-identity-schema.sql
+  - include:
+      file: db/changelog/0.0.1/changelog-create-twitter-user_profiles-table.sql
