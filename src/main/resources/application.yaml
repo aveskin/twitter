@@ -7,3 +7,8 @@ spring:
     username: root
     password: root
     driver-class-name: org.postgresql.Driver
+
+
+  jpa:
+    properties:
+      hibernate.jdbc.timezone: UTC

@@ -6,6 +6,8 @@ import ru.aveskin.twitter.user.profile.model.UserProfile;
 import ru.aveskin.twitter.user.profile.repository.UserProfileRepository;
 import ru.aveskin.twitter.user.profile.service.UserProfileService;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserProfileServiceImpl implements UserProfileService {
@@ -25,5 +27,10 @@ public class UserProfileServiceImpl implements UserProfileService {
             throw new RuntimeException(errorMessage);
         }
         userProfileRepository.save(userProfile);
+    }
+
+    @Override
+    public Optional<UserProfile> findUserProfileById(long userProfileId) {
+        return userProfileRepository.findById(userProfileId);
     }
 }
