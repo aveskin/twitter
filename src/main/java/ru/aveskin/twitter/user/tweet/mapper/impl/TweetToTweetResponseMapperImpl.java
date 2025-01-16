@@ -13,7 +13,8 @@ public class TweetToTweetResponseMapperImpl implements TweetToTweetResponseMappe
         return new TweetResponse(
                 tweet.getId(),
                 tweet.getMessage(),
-                tweet.getCreatedTimestamp()
+                tweet.getCreatedTimestamp(),
+                tweet.getModifiedTimestamp()
         );
     }
 }
