@@ -10,4 +10,6 @@ public interface TweetService {
     Tweet updateTweet(Tweet tweet);
 
     Optional<Tweet> findTweetById(long tweetId);
+
+    void deleteTweetById(long id);
 }

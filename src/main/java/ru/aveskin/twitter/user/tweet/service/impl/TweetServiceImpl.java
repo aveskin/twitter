@@ -27,4 +27,9 @@ public class TweetServiceImpl implements TweetService {
     public Optional<Tweet> findTweetById(long tweetId) {
         return repository.findById(tweetId);
     }
+
+    @Override
+    public void deleteTweetById(long id) {
+        repository.deleteById(id);
+    }
 }
