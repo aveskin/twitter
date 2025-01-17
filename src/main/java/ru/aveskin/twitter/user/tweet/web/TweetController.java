@@ -1,16 +1,15 @@
 package ru.aveskin.twitter.user.tweet.web;
 
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.aveskin.twitter.user.tweet.usecase.TweetAddUseCase;
 import ru.aveskin.twitter.user.tweet.usecase.TweetDeleteUseCase;
 import ru.aveskin.twitter.user.tweet.usecase.TweetEditUseCase;
-import ru.aveskin.twitter.user.tweet.web.dto.TweetAddRequest;
-import ru.aveskin.twitter.user.tweet.web.dto.TweetDeleteRequest;
-import ru.aveskin.twitter.user.tweet.web.dto.TweetEditRequest;
-import ru.aveskin.twitter.user.tweet.web.dto.TweetResponse;
+import ru.aveskin.twitter.user.tweet.usecase.TweetFindUseCase;
+import ru.aveskin.twitter.user.tweet.web.dto.*;
 
 @RestController
 @RequestMapping("/api/v1/tweets")
@@ -19,6 +18,7 @@ public class TweetController {
     private final TweetAddUseCase tweetAddUseCase;
     private final TweetEditUseCase tweetEditUseCase;
     private final TweetDeleteUseCase tweetDeleteUseCase;
+    private final TweetFindUseCase tweetFindUseCase;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -38,4 +38,11 @@ public class TweetController {
         tweetDeleteUseCase.deleteTweet(request);
     }
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public TweetPageResponse findOwnerTweets(@PathParam("page") int page,
+                                             @PathParam("limit") int limit) {
+        TweetFindRequest tweetFindRequest = new TweetFindRequest(page, limit);
+        return tweetFindUseCase.findTweets(tweetFindRequest);
+    }
 }

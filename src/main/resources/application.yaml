@@ -12,3 +12,5 @@ spring:
   jpa:
     properties:
       hibernate.jdbc.timezone: UTC
+      hibernate.hibernate.format_sql: true
+    show-sql: true
