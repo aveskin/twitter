@@ -9,3 +9,5 @@ databaseChangeLog:
       file: db/changelog/0.0.1/changelog-create-twitter-tweets-table.sql
   - include:
       file: db/changelog/0.0.1/changelog-update-twitter-tweets-table.sql
+  - include:
+      file: db/changelog/0.0.1/changelog-update-twitter-subscriptions-table.sql
