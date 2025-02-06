@@ -2,6 +2,7 @@ package ru.aveskin.twitter.user.subscription.usecase.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.user.profile.model.UserProfile;
 import ru.aveskin.twitter.user.subscription.mapper.UnsubscribeRequestToSubscriptionMapper;
 import ru.aveskin.twitter.user.subscription.model.Subscription;
@@ -23,11 +24,11 @@ public class SubscriptionDeleteUseCaseFacade implements SubscriptionDeleteUseCas
         UserProfile followed = subscription.getFollowed();
 
         if (follower.equals(followed)) {
-            throw new RuntimeException("Пользователь не может отписаться сам от себя");
+            throw new TwitterException("Пользователь не может отписаться сам от себя");
         }
 
         if (!subscriptionService.existSubscription(subscription)) {
-            throw new RuntimeException("Пользователь уже не подписан");
+            throw new TwitterException("Пользователь уже не подписан");
         }
 
         subscriptionService.deleteSubscription(subscription);

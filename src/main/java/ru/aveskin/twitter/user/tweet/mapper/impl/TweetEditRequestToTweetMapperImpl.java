@@ -2,6 +2,7 @@ package ru.aveskin.twitter.user.tweet.mapper.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.user.tweet.mapper.TweetEditRequestToTweetMapper;
 import ru.aveskin.twitter.user.tweet.model.Tweet;
 import ru.aveskin.twitter.user.tweet.service.TweetService;
@@ -16,7 +17,7 @@ public class TweetEditRequestToTweetMapperImpl implements TweetEditRequestToTwee
     public Tweet map(TweetEditRequest request) {
         Tweet currentTweet = service
                 .findTweetById(request.id())
-                .orElseThrow(() -> new RuntimeException("Твита по данному id не существет в БД"));
+                .orElseThrow(() -> new TwitterException("Твита по данному id не существет в БД"));
 
         currentTweet.setMessage(request.message());
 

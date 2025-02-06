@@ -2,6 +2,7 @@ package ru.aveskin.twitter.user.tweet.usecase.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.user.profile.api.service.CurrentUserProfileApiService;
 import ru.aveskin.twitter.user.profile.model.UserProfile;
 import ru.aveskin.twitter.user.tweet.service.TweetService;
@@ -24,12 +25,12 @@ public class TweetDeleteUseCaseFacade implements TweetDeleteUseCase {
                     String errorMessage = String
                             .format("твит с id = %d не найден, удаление невозможно",
                                     request.id());
-                    return new RuntimeException(errorMessage);
+                    return new TwitterException(errorMessage);
                 })
                 .getUserProfile();
 
         if (!actor.equals(owner)) {
-            throw new RuntimeException("Пользователь не является владельцем твита, удаление невозможно");
+            throw new TwitterException("Пользователь не является владельцем твита, удаление невозможно");
         }
 
         tweetService.deleteTweetById(request.id());

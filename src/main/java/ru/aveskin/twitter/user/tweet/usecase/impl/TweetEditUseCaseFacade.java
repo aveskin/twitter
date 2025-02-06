@@ -2,6 +2,7 @@ package ru.aveskin.twitter.user.tweet.usecase.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.user.profile.api.service.CurrentUserProfileApiService;
 import ru.aveskin.twitter.user.profile.model.UserProfile;
 import ru.aveskin.twitter.user.tweet.mapper.TweetEditRequestToTweetMapper;
@@ -27,10 +28,10 @@ public class TweetEditUseCaseFacade implements TweetEditUseCase {
         UserProfile owner = service
                 .findTweetById(request.id())
                 .map(Tweet::getUserProfile)
-                .orElseThrow(() -> new RuntimeException("Твита по данному id не существет в БД"));
+                .orElseThrow(() -> new TwitterException("Твита по данному id не существет в БД"));
 
         if (!actor.equals(owner)) {
-            throw new RuntimeException("Тивит не принадлежит пользователю, редактирование запрещено");
+            throw new TwitterException("Тивит не принадлежит пользователю, редактирование запрещено");
         }
 
         Tweet udatedTweet = service.updateTweet(tweetEditRequestToTweetMapper.map(request));

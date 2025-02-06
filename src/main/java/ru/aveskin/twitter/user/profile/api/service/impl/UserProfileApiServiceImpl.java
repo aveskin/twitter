@@ -2,6 +2,7 @@ package ru.aveskin.twitter.user.profile.api.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.user.profile.api.service.UserProfileApiService;
 import ru.aveskin.twitter.user.profile.model.UserProfile;
 import ru.aveskin.twitter.user.profile.service.UserProfileService;
@@ -19,7 +20,7 @@ public class UserProfileApiServiceImpl implements UserProfileApiService {
                     String errorMessage = String
                             .format("Профиля пользователя с id = %d не сущестует", userProfileId
                             );
-                    return new RuntimeException(errorMessage);
+                    return new TwitterException(errorMessage);
                 });
     }
 }

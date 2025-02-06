@@ -2,6 +2,7 @@ package ru.aveskin.twitter.user.profile.mapper.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.security.api.model.CurrentUserApiModel;
 import ru.aveskin.twitter.security.api.service.IdentityApiService;
 import ru.aveskin.twitter.user.profile.mapper.UserProfileRegisterRequestToUserProfileMapper;
@@ -19,7 +20,7 @@ public class UserProfileRegisterRequestToUserProfileMapperImpl
     public UserProfile map(UserProfileRegisterRequest request) {
         CurrentUserApiModel currentUserApiModel = identityApiService
                 .currentUserAccount()
-                .orElseThrow(() -> new RuntimeException("Для создания профиля, пользователь должен быть авторизован"));
+                .orElseThrow(() -> new TwitterException("Для создания профиля, пользователь должен быть авторизован"));
 
         UserProfile userProfile = new UserProfile();
         userProfile.setId(currentUserApiModel.userAccountId());

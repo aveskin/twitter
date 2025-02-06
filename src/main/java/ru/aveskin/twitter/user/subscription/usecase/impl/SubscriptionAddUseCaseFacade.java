@@ -2,6 +2,7 @@ package ru.aveskin.twitter.user.subscription.usecase.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.user.profile.model.UserProfile;
 import ru.aveskin.twitter.user.subscription.mapper.SubscribeRequestToSubscriptionMapper;
 import ru.aveskin.twitter.user.subscription.model.Subscription;
@@ -22,11 +23,11 @@ public class SubscriptionAddUseCaseFacade implements SubscriptionAddUseCase {
         UserProfile followed = subscription.getFollowed();
 
         if (follower.equals(followed)) {
-            throw new RuntimeException("Пользователь не может подписаться сам на себя");
+            throw new TwitterException("Пользователь не может подписаться сам на себя");
         }
 
         if (subscriptionService.existSubscription(subscription)) {
-            throw new RuntimeException("Пользователь уже имеет данную подписку");
+            throw new TwitterException("Пользователь уже имеет данную подписку");
         }
 
         subscriptionService.createSubscription(subscription);

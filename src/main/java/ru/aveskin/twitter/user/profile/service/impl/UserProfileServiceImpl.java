@@ -2,6 +2,7 @@ package ru.aveskin.twitter.user.profile.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.user.profile.model.UserProfile;
 import ru.aveskin.twitter.user.profile.repository.UserProfileRepository;
 import ru.aveskin.twitter.user.profile.service.UserProfileService;
@@ -18,13 +19,13 @@ public class UserProfileServiceImpl implements UserProfileService {
         if (userProfileRepository.existsById(userProfile.getId())) {
             String errorMessage = String
                     .format("Профиль пользователя с данным id = %d уже существует", userProfile.getId());
-            throw new RuntimeException(errorMessage);
+            throw new TwitterException(errorMessage);
         }
 
         if (userProfileRepository.existsByNickname(userProfile.getNickname())) {
             String errorMessage = String
                     .format("Профиль пользователя с данным nickname = %s уже существует", userProfile.getNickname());
-            throw new RuntimeException(errorMessage);
+            throw new TwitterException(errorMessage);
         }
         userProfileRepository.save(userProfile);
     }

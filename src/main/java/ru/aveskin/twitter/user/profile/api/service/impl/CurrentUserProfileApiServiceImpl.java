@@ -2,6 +2,7 @@ package ru.aveskin.twitter.user.profile.api.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.security.api.model.CurrentUserApiModel;
 import ru.aveskin.twitter.security.api.service.IdentityApiService;
 import ru.aveskin.twitter.user.profile.api.service.CurrentUserProfileApiService;
@@ -17,7 +18,7 @@ public class CurrentUserProfileApiServiceImpl implements CurrentUserProfileApiSe
     @Override
     public UserProfile currentUserProfile() {
         CurrentUserApiModel currentUserApiModel = identityApiService.currentUserAccount()
-                .orElseThrow(() -> new RuntimeException("Пользователь должен быть атворизован"));
+                .orElseThrow(() -> new TwitterException("Пользователь должен быть атворизован"));
 
         return userProfileService
                 .findUserProfileById(currentUserApiModel.userAccountId())
@@ -26,7 +27,7 @@ public class CurrentUserProfileApiServiceImpl implements CurrentUserProfileApiSe
                             .format("Профиля пользователя с id = %d не сущестует",
                                     currentUserApiModel.userAccountId()
                             );
-                    return new RuntimeException(errorMessage);
+                    return new TwitterException(errorMessage);
                 });
     }
 }

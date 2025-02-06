@@ -10,3 +10,9 @@ services:
       - POSTGRES_PASSWORD=${TWITTER_DB_PASSWORD}
       - POSTGRES_DB=${TWITTER_DB_NAME}
 
+
+  sonar:
+    image: sonarqube:10.2.1-community
+    ports:
+      - '9000:9000'
+

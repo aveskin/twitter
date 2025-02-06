@@ -1,5 +1,6 @@
 package ru.aveskin.twitter.security.mapper;
 
+import ru.aveskin.twitter.common.mapper.Mapper;
 import ru.aveskin.twitter.security.model.UserAccount;
 import ru.aveskin.twitter.security.web.dto.RegisterRequest;
 

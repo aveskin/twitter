@@ -2,6 +2,7 @@ package ru.aveskin.twitter.security.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.security.model.UserAccount;
 import ru.aveskin.twitter.security.repository.UserAccountRepository;
 import ru.aveskin.twitter.security.service.UserAccountService;
@@ -16,7 +17,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     public void createUserAccount(UserAccount userAccount) {
         if (userAccountRepository.existsByUsername(userAccount.getUsername())) {
-            throw new RuntimeException("Account with this username has already existed");
+            throw new TwitterException("Account with this username has already existed");
         }
         userAccountRepository.save(userAccount);
     }

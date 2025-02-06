@@ -3,6 +3,7 @@ package ru.aveskin.twitter.security.mapper.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import ru.aveskin.twitter.common.exception.TwitterException;
 import ru.aveskin.twitter.security.mapper.RegisterRequestToUserAccountMapper;
 import ru.aveskin.twitter.security.model.UserAccount;
 import ru.aveskin.twitter.security.model.UserRole;
@@ -23,7 +24,7 @@ public class RegisterRequestToUserAccountMapperImpl implements RegisterRequestTo
     public UserAccount map(RegisterRequest request) {
         UserRole userRole = userRoleService
                 .findUserRole()
-                .orElseThrow(() -> new RuntimeException("User role not found"));
+                .orElseThrow(() -> new TwitterException("User role not found"));
 
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername(request.username().toLowerCase(Locale.ROOT));

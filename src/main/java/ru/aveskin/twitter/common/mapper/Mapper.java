@@ -1,4 +1,4 @@
-package ru.aveskin.twitter.security.mapper;
+package ru.aveskin.twitter.common.mapper;
 
 public interface Mapper<D, S> {
     D map(S source);
